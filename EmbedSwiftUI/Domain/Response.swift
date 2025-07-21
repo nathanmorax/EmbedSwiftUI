@@ -48,4 +48,23 @@ enum CodigoCategoria: String, Codable {
     case c = "C"
     case ma = "MA"
     case tl = "TL"
+    
+    var color: Color {
+        switch self {
+        case .c:
+            return .blue
+        case .ma:
+            return .green
+        case .tl:
+            return .orange
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .c: return "cart"
+        case .ma: return "music.note"
+        case .tl: return "tv"
+        }
+    }
 }

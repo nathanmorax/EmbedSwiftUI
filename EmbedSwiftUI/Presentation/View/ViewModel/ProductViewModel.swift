@@ -25,7 +25,7 @@ class ProductViewModel: ObservableObject {
                 case .success(let productos):
                     self?.productos = productos
                 case .failure(let error):
-                    self?.errorMessage = "Error al cargar productos: \(error.localizedDescription)"
+                    self?.errorMessage = "Error al cargar productos"
                 }
             }
         }
