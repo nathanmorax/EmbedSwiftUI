@@ -63,7 +63,7 @@ struct ProductList: View {
 
     func content(for producto: Producto) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let urlString = producto.urlImagenes.first, let url = URL(string: urlString) {
+            if let urlString = producto.urlImagenes?.first, let url = URL(string: urlString) {
                 AsyncImage(url: url) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
@@ -75,11 +75,11 @@ struct ProductList: View {
                 }
             }
 
-            Text(producto.nombre)
+            Text(producto.nombre ?? "Empty")
                 .font(.headline)
                 .foregroundColor(.white)
 
-            Text("$\(producto.precioFinal, specifier: "%.2f")")
+            Text("$\(producto.precioFinal ?? 0.00, specifier: "%.2f")")
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.7))
         }

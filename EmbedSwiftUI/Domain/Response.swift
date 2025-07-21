@@ -7,12 +7,12 @@
 import SwiftUI
 
 struct Response: Codable {
-    let mensaje, advertencia: String
-    let resultado: Resultado
+    let mensaje, advertencia: String?
+    let resultado: Resultado?
 }
 
 struct Resultado: Codable {
-    let categoria: String
+    let categoria: String?
     let productos: [Producto]
 }
 
@@ -20,13 +20,13 @@ struct Producto: Codable, Identifiable {
     let id: String
     let idLinea: Int
     let codigoCategoria: CodigoCategoria
-    let lineaCredito: String
-    let disponibleCredito: Bool
-    let sku, nombre: String
-    let urlImagenes: [String]
-    let precioRegular: Int
-    let precioFinal, porcentajeDescuento: Double
-    let descuento: Bool
+    let lineaCredito: String?
+    let disponibleCredito: Bool?
+    let sku, nombre: String?
+    let urlImagenes: [String]?
+    let precioRegular: Int?
+    let precioFinal, porcentajeDescuento: Double?
+    let descuento: Bool?
 }
 
 enum CodigoCategoria: String, Codable, CaseIterable {

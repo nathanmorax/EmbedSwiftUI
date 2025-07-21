@@ -44,22 +44,22 @@ struct ProductDetail: View {
         VStack(spacing: 24) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(producto.sku)
+                    Text(producto.sku ?? "####")
                         .fontWeight(.semibold)
                         .foregroundStyle(.white)
                     
-                    Text(producto.nombre)
+                    Text(producto.nombre ?? "Empty")
                         .font(.title3)
                         .foregroundStyle(.white)
                     
-                    Text("$\(producto.precioFinal, specifier: "%.2f")")
+                    Text("$\(producto.precioFinal ?? 0.00, specifier: "%.2f")")
                         .fontWeight(.regular)
                         .foregroundStyle(.colorText)
                         .padding(.top, 18)
                     
-                    Text(producto.descuento ? "Con descuento" : "Sin descuento")
+                    Text(producto.descuento ?? false ? "Con descuento" : "Sin descuento")
                         .font(.subheadline)
-                        .foregroundColor(producto.descuento ? .green : .red)
+                        .foregroundColor(producto.descuento ?? false ? .green : .red)
                 }
                 Spacer()
                 
@@ -68,7 +68,7 @@ struct ProductDetail: View {
                     .foregroundStyle(producto.codigoCategoria.color)
             }
             
-            if let urlString = producto.urlImagenes.first,
+            if let urlString = producto.urlImagenes?.first,
                let url = URL(string: urlString) {
                 AsyncImage(url: url) { image in
                     image
