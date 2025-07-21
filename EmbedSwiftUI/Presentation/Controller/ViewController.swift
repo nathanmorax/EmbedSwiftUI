@@ -10,28 +10,13 @@ import SwiftUI
 
 class ViewController: UIViewController {
 
-    private var productos: [Producto] = []
-
+    private let viewModel = ProductViewModel()
     private var hostingController: UIHostingController<ProductList>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadProducts()
-    }
-
-    private func loadProducts() {
-        ProductService().fetchProducts { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let productos):
-                    self?.productos = productos
-                    self?.showSwiftUIView()
-                case .failure(let error):
-                    print("Error al cargar productos:", error)
-                }
-            }
-        }
+        viewModel.loadProducts()
+        self.showSwiftUIView()
     }
 
     private func showSwiftUIView() {
@@ -41,7 +26,7 @@ class ViewController: UIViewController {
             hc.removeFromParent()
         }
 
-        let swiftUIView = ProductList(productos: productos)
+        let swiftUIView = ProductList(viewModel: viewModel)
         let hc = UIHostingController(rootView: swiftUIView)
         hostingController = hc
 

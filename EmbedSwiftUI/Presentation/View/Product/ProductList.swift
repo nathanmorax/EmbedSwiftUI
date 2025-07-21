@@ -9,8 +9,8 @@ import SwiftUI
 
 
 struct ProductList: View {
-    let productos: [Producto]
-    
+    @ObservedObject var viewModel: ProductViewModel
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -18,7 +18,7 @@ struct ProductList: View {
                 
                 ScrollView {
                     VStack(spacing: 16) {
-                        ForEach(productos) { producto in
+                        ForEach(viewModel.productos) { producto in
                             NavigationLink(destination: ProductDetail(producto: producto)) {
                                 content(for: producto)
                             }
@@ -41,7 +41,7 @@ struct ProductList: View {
                 
                 Text(producto.descuento ? "Con descuento" : "Sin descuento")
                     .font(.subheadline)
-                    .foregroundColor(.gray)
+                    .foregroundColor(producto.descuento ? .green : .red)
                 
                 Text("Precio Final: $\(producto.precioFinal, specifier: "%.2f")")
                     .font(.title2)
@@ -73,9 +73,3 @@ struct ProductList: View {
         .padding()
     }
 }
-
-
-
-
-
-
