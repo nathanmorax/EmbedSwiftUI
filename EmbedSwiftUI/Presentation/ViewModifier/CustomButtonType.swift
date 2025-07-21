@@ -17,12 +17,24 @@ struct CustomButtonModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .frame(maxWidth: .infinity, minHeight: 44)
+            .frame(width: 70, height: 70)
             .background(backgroundFor(type))
             .foregroundStyle(foregroundFor(type))
             .overlay(overlayFor(type))
-            .cornerRadius(8)
+            .cornerRadius(35) 
     }
+
+    @ViewBuilder
+    private func overlayFor(_ type: CustomButtonType) -> some View {
+        switch type {
+        case .outline(let color):
+            RoundedRectangle(cornerRadius: 22)
+                .stroke(color, lineWidth: 2)
+        case .filled:
+            EmptyView()
+        }
+    }
+
     
     private func backgroundFor(_ type: CustomButtonType) -> Color {
         switch type {
@@ -39,17 +51,6 @@ struct CustomButtonModifier: ViewModifier {
             return color
         case .filled:
             return .white
-        }
-    }
-    
-    @ViewBuilder
-    private func overlayFor(_ type: CustomButtonType) -> some View {
-        switch type {
-        case .outline(let color):
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(color, lineWidth: 2)
-        case .filled:
-            EmptyView()
         }
     }
 }
