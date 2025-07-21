@@ -12,39 +12,24 @@ struct Response: Codable {
 }
 
 struct Resultado: Codable {
-    let paginacion: Paginacion
     let categoria: String
     let productos: [Producto]
-}
-
-struct Paginacion: Codable {
-    let pagina, totalPaginas, totalRegistros, totalRegistrosPorPagina: Int
 }
 
 struct Producto: Codable, Identifiable {
     let id: String
     let idLinea: Int
     let codigoCategoria: CodigoCategoria
-    let idModalidad, relevancia: Int
     let lineaCredito: String
-    let pagoSemanalPrincipal, plazoPrincipal: Int
     let disponibleCredito: Bool
-    let abonosSemanales: [AbonosSemanale]
     let sku, nombre: String
     let urlImagenes: [String]
     let precioRegular: Int
     let precioFinal, porcentajeDescuento: Double
     let descuento: Bool
-    let precioCredito, montoDescuento: Double
 }
 
-struct AbonosSemanale: Codable {
-    let plazo, montoAbono, montoDescuentoAbono, montoUltimoAbono: Int
-    let montoFinalCredito, idPromocion, montoDescuentoElektra, montoDescuentoBanco: Int
-    let precio, montoAbonoDigital: Int
-}
-
-enum CodigoCategoria: String, Codable {
+enum CodigoCategoria: String, Codable, CaseIterable {
     case c = "C"
     case ma = "MA"
     case tl = "TL"
@@ -60,11 +45,11 @@ enum CodigoCategoria: String, Codable {
         }
     }
     
-    var iconName: String {
+    var title: String {
         switch self {
-        case .c: return "cart"
-        case .ma: return "music.note"
-        case .tl: return "tv"
+        case .c: return "Descubre"
+        case .ma: return "Motos"
+        case .tl: return "Celulares"
         }
     }
 }
