@@ -24,7 +24,7 @@ class ProductViewModel: ObservableObject {
                 switch result {
                 case .success(let productos):
                     self?.productos = productos
-                case .failure(let error):
+                case .failure:
                     self?.errorMessage = "Error al cargar productos"
                 }
             }
