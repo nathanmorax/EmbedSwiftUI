@@ -29,14 +29,12 @@ class ViewController: UIViewController {
                     self?.showSwiftUIView()
                 case .failure(let error):
                     print("Error al cargar productos:", error)
-                    // Aquí puedes mostrar un error visual si quieres
                 }
             }
         }
     }
 
     private func showSwiftUIView() {
-        // Si ya existe un hosting, remuévelo
         if let hc = hostingController {
             hc.willMove(toParent: nil)
             hc.view.removeFromSuperview()
